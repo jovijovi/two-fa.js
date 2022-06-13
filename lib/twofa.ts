@@ -1,8 +1,11 @@
 import {BinaryLike, createHmac} from 'crypto';
+import {NewRand} from './random';
+import {IOptionFunc, IOptions, NewOptions} from './options';
+import * as base32 from './base32';
 
-const CodeDigits6 = 6
-const CodeDigits7 = 7
-const CodeDigits8 = 8
+const CodeDigits6 = 6;
+const CodeDigits7 = 7;
+const CodeDigits8 = 8;
 
 const power = new Map([
 	[CodeDigits6, 1e6],
@@ -48,4 +51,37 @@ function hOTP(key: BinaryLike, counter: number, digits: number): number {
 
 function tOTP(key: BinaryLike, tm: number, digits: number): number {
 	return hOTP(key, Math.floor(tm / 30e3), digits);
+}
+
+// EncodeKey returns encoded key
+export function EncodeKey<T extends IOptions>(raw: string, ...opt: IOptionFunc<T>[]): string {
+	const opts = NewOptions<IOptions>(...opt);
+	let key: string;
+	if (opts.withHash) {
+		const digest = opts.HashFunc.Hash(raw);
+		key = base32.Encode(digest).toUpperCase();
+	} else {
+		key = base32.Encode(raw).toUpperCase();
+	}
+
+	// TODO: QR
+	if (opts.withQR) {
+
+	}
+
+	return key;
+}
+
+export function DecodeKey(key: string): ArrayBuffer {
+	return base32.Decode(key);
+}
+
+// GenKey returns random encoded key
+export function GenKey<T extends IOptions>(...opt: IOptionFunc<T>[]): string {
+	const val = NewRand();
+	if (!val) {
+		throw new Error('invalid random');
+	}
+
+	return EncodeKey(val.toString(), ...opt);
 }

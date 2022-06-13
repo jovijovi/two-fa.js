@@ -1,6 +1,6 @@
 {
   "name": "@jovijovi/two-fa.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A two-factor authentication(2FA) based on HOTP & TOTP written in TypeScript",
   "author": "jovijovi <mageyul@hotmail.com>",
   "license": "MIT",
@@ -31,5 +31,8 @@
     "ts-node": "10.8.1",
     "typescript": "4.7.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "base32-decode": "^1.0.0",
+    "base32-encode": "^1.2.0"
+  }
 }
