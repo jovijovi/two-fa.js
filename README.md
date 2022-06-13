@@ -14,6 +14,9 @@ A two-factor authentication(2FA) based on HOTP & TOTP written in [TypeScript](ht
 
 - Based on HOTP/TOTP algorithm
 - Get code by raw key
+- Get code by encoded key
+- Encode/Decode key
+- Gen random key
 
 ## Development Environment
 
@@ -46,9 +49,7 @@ console.debug("Code=", code);
 ## Roadmap
 
 - Documents
-- Get code by encoded key
-- Encode/Decode key
-- Gen random key
+- QR
 
 ## License
 
