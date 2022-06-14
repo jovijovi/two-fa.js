@@ -4,8 +4,9 @@ import {twofa} from '../lib';
 import {WithDefaultHashFunc, WithHashFunc} from '../lib/options';
 import {HashFunc} from '../lib/hash';
 
-const mockKey = 'Hello, world!';
-const mockCode = '058923';
+const mockKey = 'JBSWY3DPFQQHO33SNRSCC';
+const mockRawKey = 'Hello, world!';
+const mockCode = '982378';
 
 function customHashFunc(): HashFunc {
 	const hashFunc = new HashFunc();
@@ -19,16 +20,17 @@ test('GetCode', () => {
 })
 
 test('GetCode with specified timestamp', () => {
-	const code = twofa.GetCode(mockKey, 1654776755584);
+	const code = twofa.GetCode(mockKey, 1655204300628);
 	console.debug("Code=", code);
 	assert.strictEqual(code, mockCode)
 })
 
 test('Base32(Encode/Decode)', () => {
-	const cipherText = twofa.EncodeKey(mockKey);
+	const cipherText = twofa.EncodeKey(mockRawKey);
+	console.debug("Encoded Key=", cipherText);
 	const plainText = twofa.DecodeKey(cipherText);
 	const utf8string = Buffer.from(plainText).toString('utf8');
-	assert.strictEqual(utf8string, mockKey)
+	assert.strictEqual(utf8string, mockRawKey)
 })
 
 test('GenKey', () => {

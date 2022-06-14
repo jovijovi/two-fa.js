@@ -13,8 +13,9 @@ const power = new Map([
 	[CodeDigits8, 1e8],
 ]);
 
-export function GetCode(key: BinaryLike, tm?: number): string {
-	const code = tOTP(key, tm ? tm : new Date().getTime(), CodeDigits6).toString();
+export function GetCode(key: string, tm?: number): string {
+	const raw = Buffer.from(DecodeKey(key));
+	const code = tOTP(raw, tm ? tm : new Date().getTime(), CodeDigits6).toString();
 
 	if (code.length < CodeDigits6) {
 		return code.padStart(CodeDigits6, '0');
