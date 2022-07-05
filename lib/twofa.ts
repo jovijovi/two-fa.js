@@ -46,7 +46,7 @@ function hOTP(key: BinaryLike, counter: number, digits: number): number {
 
 	const hmac = createHmac('sha1', key);
 	const digest = hmac.update(toBuffer(counter)).digest();
-	const bin = digest.slice(digest[digest.length - 1] & 0x0F).readUInt32BE() & 0x7FFFFFFF;
+	const bin = digest.subarray(digest[digest.length - 1] & 0x0F).readUInt32BE() & 0x7FFFFFFF;
 	return bin % power.get(digits);
 }
 
