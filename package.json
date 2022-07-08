@@ -1,6 +1,6 @@
 {
   "name": "@jovijovi/two-fa.js",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A two-factor authentication(2FA) based on HOTP & TOTP written in TypeScript",
   "author": "jovijovi <mageyul@hotmail.com>",
   "license": "MIT",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "@types/jest": "28.1.4",
-    "@types/node": "18.0.1",
+    "@types/node": "18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "eslint": "^8.19.0",
